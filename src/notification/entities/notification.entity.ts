@@ -6,11 +6,14 @@ export class Notification {
   id: number;
 
   @Column()
-  productId: number;
+  title: string;
 
   @Column()
   message: string;
 
-  @Column({ default: false })
-  read: boolean;
+  @Column()
+  recipientId: number;
+
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  createdAt: Date;
 }
