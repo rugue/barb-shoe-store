@@ -9,14 +9,14 @@ import { Repository } from 'typeorm';
 export class OrderService {
   constructor(
     @InjectRepository(Order)
-    private orderRepository: Repository<Order>,
+    private readonly orderRepository: Repository<Order>,
   ) {}
 
-  create(order: Order): Promise<Order> {
-    return this.orderRepository.save(order);
+  async findAll(): Promise<Order[]> {
+    return this.orderRepository.find();
   }
 
-  findAll(): Promise<Order[]> {
-    return this.orderRepository.find();
+  async create(order: Order): Promise<Order> {
+    return this.orderRepository.save(order);
   }
 }

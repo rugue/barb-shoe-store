@@ -34,6 +34,4 @@ describe('ProductService', () => {
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
-
-  // Additional tests for CRUD operations
 });
