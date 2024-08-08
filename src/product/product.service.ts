@@ -24,12 +24,16 @@ export class ProductService {
     await this.productRepository.delete(id);
   }
 
-  create(product: Product): Promise<Product> {
+  create(createProductDto: CreateProductDto): Promise<Product> {
+    const product = this.productRepository.create(createProductDto);
     return this.productRepository.save(product);
   }
 
-  async update(id: number, product: Partial<Product>): Promise<Product> {
-    await this.productRepository.update(id, product);
+  async update(
+    id: number,
+    updateProductDto: UpdateProductDto,
+  ): Promise<Product> {
+    await this.productRepository.update(id, updateProductDto);
     return this.productRepository.findOneBy({ id });
   }
 }

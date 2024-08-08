@@ -45,8 +45,8 @@ export class ProductController {
     description: 'The product has been successfully created.',
   })
   @Post()
-  create(@Body() product: Product): Promise<Product> {
-    return this.productService.create(product);
+  create(@Body() createProductDto: CreateProductDto): Promise<Product> {
+    return this.productService.create(createProductDto);
   }
 
   @ApiOperation({ summary: 'Update a product' })
@@ -57,9 +57,9 @@ export class ProductController {
   @Put(':id')
   update(
     @Param('id') id: number,
-    @Body() product: Partial<Product>,
+    @Body() updateProductDto: UpdateProductDto,
   ): Promise<Product> {
-    return this.productService.update(id, product);
+    return this.productService.update(id, updateProductDto);
   }
 
   @ApiOperation({ summary: 'Delete a product' })
