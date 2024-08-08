@@ -30,8 +30,8 @@ export class OrderController {
     description: 'The order has been successfully created.',
   })
   @Post()
-  create(@Body() order: Order): Promise<Order> {
-    return this.orderService.create(order);
+  create(@Body() createOrderDto: CreateOrderDto): Promise<Order> {
+    return this.orderService.create(createOrderDto);
   }
 
   @ApiOperation({ summary: 'Get all orders' })
@@ -39,5 +39,28 @@ export class OrderController {
   @Get()
   findAll(): Promise<Order[]> {
     return this.orderService.findAll();
+  }
+
+  @ApiOperation({ summary: 'Update an order' })
+  @ApiResponse({
+    status: 200,
+    description: 'The order has been successfully updated.',
+  })
+  @Patch(':id')
+  update(
+    @Param('id') id: number,
+    @Body() updateOrderDto: UpdateOrderDto,
+  ): Promise<Order> {
+    return this.orderService.update(id, updateOrderDto);
+  }
+
+  @ApiOperation({ summary: 'Delete an order' })
+  @ApiResponse({
+    status: 200,
+    description: 'The order has been successfully deleted.',
+  })
+  @Delete(':id')
+  remove(@Param('id') id: number): Promise<void> {
+    return this.orderService.remove(id);
   }
 }
