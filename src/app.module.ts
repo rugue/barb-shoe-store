@@ -21,7 +21,7 @@ import { UserModule } from './user/user.module';
       database: process.env.DB_DATABASE,
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       // entities: [process.env.DB_ENTITIES],
-      synchronize: true, // should be false in production
+      synchronize: false,
     }),
     AuthModule,
     NotificationModule,
