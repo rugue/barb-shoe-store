@@ -25,6 +25,7 @@ export class UserService {
     }
     return user;
   }
+
   async findByUsername(username: string): Promise<User> {
     const user = await this.userRepository.findOne({
       where: { username },
@@ -32,13 +33,14 @@ export class UserService {
     return user;
   }
 
-  async create(user: CreateUserDto): Promise<User> {
-    return this.userRepository.save(user);
+  async create(createUserDto: CreateUserDto): Promise<User> {
+    const newUser = this.userRepository.create(createUserDto);
+    return this.userRepository.save(newUser);
   }
 
-  async update(id: number, user: Partial<User>): Promise<User> {
+  async update(id: number, updateUserDto: UpdateUserDto): Promise<User> {
     await this.findOne(id); // Ensure the user exists
-    await this.userRepository.update(id, user);
+    await this.userRepository.update(id, updateUserDto);
     return this.findOne(id); // Return the updated user
   }
 

@@ -30,6 +30,8 @@ export class UserController {
   @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Get all users' })
   @ApiResponse({ status: 200, description: 'Return all users.' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  @ApiResponse({ status: 403, description: 'Forbidden' })
   @Get()
   findAll(): Promise<User[]> {
     return this.userService.findAll();
@@ -49,8 +51,8 @@ export class UserController {
     description: 'The user has been successfully created.',
   })
   @Post()
-  create(@Body() user: User): Promise<User> {
-    return this.userService.create(user);
+  create(@Body() createUserDto: CreateUserDto): Promise<User> {
+    return this.userService.create(createUserDto);
   }
 
   @UseGuards(JwtAuthGuard)
@@ -60,8 +62,11 @@ export class UserController {
     description: 'The user has been successfully updated.',
   })
   @Put(':id')
-  update(@Param('id') id: number, @Body() user: Partial<User>): Promise<User> {
-    return this.userService.update(id, user);
+  update(
+    @Param('id') id: number,
+    @Body() updateUserDto: UpdateUserDto,
+  ): Promise<User> {
+    return this.userService.update(id, updateUserDto);
   }
 
   @UseGuards(JwtAuthGuard)
