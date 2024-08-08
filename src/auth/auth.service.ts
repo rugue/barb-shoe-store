@@ -34,7 +34,9 @@ export class AuthService {
 
     const payload: JwtPayload = { username: user.username, sub: user.id };
     return {
+      message: 'User created successfully',
       access_token: this.jwtService.sign(payload),
+      data: payload,
     };
   }
 
@@ -46,6 +48,8 @@ export class AuthService {
       const payload: JwtPayload = { username: user.username, sub: user.id };
       return {
         access_token: this.jwtService.sign(payload),
+        message: 'Login successful',
+        data: payload,
       };
     }
 

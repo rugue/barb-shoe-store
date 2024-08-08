@@ -29,9 +29,6 @@ export class UserService {
     const user = await this.userRepository.findOne({
       where: { username },
     });
-    if (!user) {
-      throw new NotFoundException(`User with username ${username} not found`);
-    }
     return user;
   }
 
