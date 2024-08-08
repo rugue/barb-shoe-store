@@ -13,7 +13,7 @@ import { UserModule } from './user/user.module';
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot({
-      type: process.env.DB_TYPE as 'postgres',
+      type: 'postgres',
       host: process.env.DB_HOST,
       port: parseInt(process.env.DB_PORT, 10),
       username: process.env.DB_USERNAME,
@@ -21,7 +21,7 @@ import { UserModule } from './user/user.module';
       database: process.env.DB_DATABASE,
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       // entities: [process.env.DB_ENTITIES],
-      synchronize: false,
+      synchronize: true,
     }),
     AuthModule,
     NotificationModule,
